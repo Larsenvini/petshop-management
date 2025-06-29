@@ -113,7 +113,7 @@ def criar_janela_servicos():
         entrada_preco.delete(0, 'end')
         entrada_duracao.delete(0, 'end')
 
-    frame_botoes = ctk.CTkFrame(janela, fg_color="#3179a2")
+    frame_botoes = ctk.CTkFrame(janela, fg_color="#2196F3")
     frame_botoes.pack(pady=10)
 
     ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar).pack(side="left", padx=5)
@@ -121,7 +121,7 @@ def criar_janela_servicos():
     ctk.CTkButton(frame_botoes, text="Excluir", command=excluir).pack(side="left", padx=5)
     ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos).pack(side="left", padx=5)
 
-    frame_lista = ctk.CTkFrame(janela, fg_color="#3179a2")
+    frame_lista = ctk.CTkFrame(janela, fg_color="#2196F3")
     frame_lista.pack(fill="both", expand=True, padx=20, pady=20)
 
     lista_servicos = ctk.CTkTextbox(frame_lista)

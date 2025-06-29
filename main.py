@@ -40,7 +40,7 @@ def login():
         master=janela_login,
         text="Pet Shop",
         font=("Inter", 38, "bold"),
-        text_color="#202966"
+        text_color="#333333"
     )
     loginText.place(x=175, y=100)
 
@@ -48,7 +48,7 @@ def login():
         master=janela_login,
         text="Management System",
         font=("Inter", 16, "bold"),
-        text_color="#202966"
+        text_color="#333333"
     )
     subtitleText.place(x=185, y=140)
 
@@ -84,9 +84,9 @@ def login():
         entradaUsuario_frame,
         placeholder_text="Usuário",
         font=("Inter", 12, "italic"),
-        text_color="#000000",
-        fg_color="#3179a2",
-        placeholder_text_color="#202966",
+        text_color="#333333",
+        fg_color="#2196F3",
+        placeholder_text_color="#9E9E9E",
         border_width=0,
         width=180 if user_img else 200
     )
@@ -111,8 +111,8 @@ def login():
         placeholder_text="Senha",
         font=("Inter", 12, "italic"),
         text_color="000000",
-        fg_color="#3179a2",
-        placeholder_text_color="#202966",
+        fg_color="#2196F3",
+        placeholder_text_color="#9E9E9E",
         border_width=0,
         width=180 if password_img else 200,
         show="*"
@@ -125,8 +125,8 @@ def login():
         text="Entrar",
         font=("Inter", 16, "bold"),
         text_color="#FFFFFF",
-        fg_color="#3179a2",
-        hover_color="#202966",
+        fg_color="#2196F3",
+        hover_color="#1976D2",
         width=234,
         height=41,
         corner_radius=50,
@@ -145,13 +145,13 @@ def menu_principal():
     except:
         pass
     janela.resizable(False, False)
-    janela.configure(fg_color="#3179a2")
+    janela.configure(fg_color="#FFFFFF")
 
     titleText = ctk.CTkLabel(
         master=janela,
         text="Pet Shop",
         font=("Inter", 42, "bold"),
-        text_color="#202966"
+        text_color="#333333"
     )
     titleText.place(x=250, y=50)
 
@@ -159,7 +159,7 @@ def menu_principal():
         master=janela,
         text="Sistema de Gestão",
         font=("Inter", 18, "italic"),
-        text_color="#202966"
+        text_color="#333333"
     )
     subtitleText.place(x=275, y=100)
 
