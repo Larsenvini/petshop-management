@@ -77,10 +77,14 @@ def criar_janela_animais():
     ctk.CTkLabel(frame_campos, text="Idade:", font=label_font, text_color=text_color).grid(row=4, column=0, padx=10, pady=8, sticky="w")
     entrada_idade = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
     entrada_idade.grid(row=4, column=1, padx=10, pady=8)
+    
+    ctk.CTkLabel(frame_campos, text="Peso:", font=label_font, text_color=text_color).grid(row=5, column=0, padx=10, pady=8, sticky="w")
+    entrada_peso = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_peso.grid(row=5, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="ID do Tutor:", font=label_font, text_color=text_color).grid(row=5, column=0, padx=10, pady=8, sticky="w")
+    ctk.CTkLabel(frame_campos, text="ID do Tutor:", font=label_font, text_color=text_color).grid(row=6, column=0, padx=10, pady=8, sticky="w")
     entrada_tutor_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
-    entrada_tutor_id.grid(row=5, column=1, padx=10, pady=8)
+    entrada_tutor_id.grid(row=6, column=1, padx=10, pady=8)
 
     frame_campos.grid_columnconfigure(0, weight=1)
     frame_campos.grid_columnconfigure(1, weight=3)
@@ -92,6 +96,7 @@ def criar_janela_animais():
                 entrada_especie.get(),
                 entrada_raca.get(),
                 int(entrada_idade.get()),
+                int(entrada_peso.get()),
                 int(entrada_tutor_id.get())
             )
             limpar_campos()
