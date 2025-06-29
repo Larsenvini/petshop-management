@@ -45,54 +45,92 @@ def excluir_pagamento(id_pagamento):
 
 def criar_janela_pagamentos():
     janela = ctk.CTk()
-    janela.geometry("1000x700")
+    janela.geometry("800x600")
     janela.title("Gerenciamento de Pagamentos")
-    janela.configure(fg_color="#FFFFFF")
+    janela.configure(fg_color="#ECF0F1")
+    janela.resizable(False, False)
 
-    # Campos de entrada
-    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")
+    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
     frame_campos.pack(pady=20, padx=20, fill="x")
 
-    ctk.CTkLabel(frame_campos, text="Agendamento:").grid(row=0, column=0, padx=5, pady=5)
-    lista_agendamentos = ctk.CTkComboBox(frame_campos)
-    lista_agendamentos.grid(row=0, column=1, padx=5, pady=5)
+    label_font = ("Inter", 12)
+    entry_font = ("Inter", 12)
+    text_color = "#2C3E50"
 
-    ctk.CTkLabel(frame_campos, text="Valor:").grid(row=1, column=0, padx=5, pady=5)
-    entrada_valor = ctk.CTkEntry(frame_campos)
-    entrada_valor.grid(row=1, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID (para editar/excluir):", font=label_font, text_color=text_color).grid(row=0, column=0, padx=10, pady=8, sticky="w")
+    entrada_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_id.grid(row=0, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Forma de Pagamento:").grid(row=2, column=0, padx=5, pady=5)
-    lista_formas = ctk.CTkComboBox(frame_campos)
-    lista_formas.grid(row=2, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID Agendamento:", font=label_font, text_color=text_color).grid(row=1, column=0, padx=10, pady=8, sticky="w")
+    entrada_agendamento_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_agendamento_id.grid(row=1, column=1, padx=10, pady=8)
 
-    # Botões
-    frame_botoes = ctk.CTkFrame(janela, fg_color="#2196F3")
+    ctk.CTkLabel(frame_campos, text="Valor:", font=label_font, text_color=text_color).grid(row=2, column=0, padx=10, pady=8, sticky="w")
+    entrada_valor = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_valor.grid(row=2, column=1, padx=10, pady=8)
+
+    ctk.CTkLabel(frame_campos, text="Método de Pagamento:", font=label_font, text_color=text_color).grid(row=3, column=0, padx=10, pady=8, sticky="w")
+    entrada_metodo = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_metodo.grid(row=3, column=1, padx=10, pady=8)
+
+    frame_campos.grid_columnconfigure(0, weight=1)
+    frame_campos.grid_columnconfigure(1, weight=3)
+    
+    def cadastrar():
+        try:
+            cadastrar_pagamento(entrada_agendamento_id.get(), entrada_valor.get(), entrada_metodo.get())
+            limpar_campos()
+            atualizar_lista()
+        except ValueError:
+            pass
+
+    def atualizar():
+        try:
+            # A função original 'atualizar_pagamento' espera status e data, 
+            # que não estão no formulário. Usarei valores padrão.
+            atualizar_pagamento(
+                int(entrada_id.get()),
+                float(entrada_valor.get()),
+                entrada_metodo.get(),
+                'pago', # Status padrão
+                '' # Data padrão
+            )
+            limpar_campos()
+            atualizar_lista()
+        except (ValueError, IndexError):
+            pass
+
+    def excluir():
+        try:
+            excluir_pagamento(int(entrada_id.get()))
+            limpar_campos()
+            atualizar_lista()
+        except ValueError:
+            pass
+
+    def limpar_campos():
+        entrada_id.delete(0, 'end')
+        entrada_agendamento_id.delete(0, 'end')
+        entrada_valor.delete(0, 'end')
+        entrada_metodo.delete(0, 'end')
+
+    frame_botoes = ctk.CTkFrame(janela, fg_color="transparent")
     frame_botoes.pack(pady=10)
 
-    ctk.CTkButton(frame_botoes, text="Cadastrar", command=lambda: cadastrar_pagamento(
-        lista_agendamentos.get(),
-        entrada_valor.get(),
-        lista_formas.get()
-    )).pack(side="left", padx=5)
+    button_font = ("Inter", 12, "bold")
+    button_corner_radius = 8
 
-    ctk.CTkButton(frame_botoes, text="Atualizar", command=lambda: atualizar_pagamento(
-        entrada_id.get(),
-        entrada_valor.get(),
-        lista_formas.get(),
-        lista_status.get(),
-        entrada_data.get()
-    )).pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Atualizar", command=atualizar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Excluir", command=excluir, font=button_font, corner_radius=button_corner_radius, fg_color="#E74C3C", hover_color="#C0392B").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos, font=button_font, corner_radius=button_corner_radius, fg_color="#95A5A6", hover_color="#7F8C8D").pack(side="left", padx=5)
 
-    ctk.CTkButton(frame_botoes, text="Excluir", command=lambda: excluir_pagamento(entrada_id.get())).pack(side="left", padx=5)
+    frame_lista = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
+    frame_lista.pack(fill="both", expand=True, padx=20, pady=10)
 
-    # Lista de pagamentos
-    frame_lista = ctk.CTkFrame(janela, fg_color="#2196F3")
-    frame_lista.pack(fill="both", expand=True, padx=20, pady=20)
+    lista_pagamentos = ctk.CTkTextbox(frame_lista, fg_color="transparent", font=("Inter", 12), text_color="#333333")
+    lista_pagamentos.pack(fill="both", expand=True, padx=10, pady=10)
 
-    lista_pagamentos = ctk.CTkTextbox(frame_lista)
-    lista_pagamentos.pack(fill="both", expand=True)
-
-    # Função para atualizar lista
     def atualizar_lista():
         pagamentos = listar_pagamentos()
         lista_pagamentos.delete("1.0", "end")

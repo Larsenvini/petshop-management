@@ -34,23 +34,23 @@ def login():
         pass
     janela_login.title("Pet Shop - Login")
     janela_login.resizable(False, False)
-    janela_login.configure(fg_color="#FFFFFF")
+    janela_login.configure(fg_color="#ECF0F1")
 
     loginText = ctk.CTkLabel(
         master=janela_login,
         text="Pet Shop",
-        font=("Inter", 38, "bold"),
-        text_color="#333333"
+        font=("Inter", 36, "bold"),
+        text_color="#2C3E50"
     )
     loginText.place(x=175, y=100)
 
     subtitleText = ctk.CTkLabel(
         master=janela_login,
         text="Management System",
-        font=("Inter", 16, "bold"),
-        text_color="#333333"
+        font=("Inter", 14),
+        text_color="#34495E"
     )
-    subtitleText.place(x=185, y=140)
+    subtitleText.place(x=185, y=145)
 
     try:
         user_pil = Image.open("assets/user.png")
@@ -67,7 +67,9 @@ def login():
     entradaUsuario_frame = ctk.CTkFrame(
         master=janela_login,
         fg_color="#FFFFFF",
-        corner_radius=50,
+        border_color="#BDC3C7",
+        border_width=1,
+        corner_radius=10,
         width=234,
         height=41
     )
@@ -83,10 +85,10 @@ def login():
     entrada_usuario = ctk.CTkEntry(
         entradaUsuario_frame,
         placeholder_text="Usuário",
-        font=("Inter", 12, "italic"),
-        text_color="#333333",
-        fg_color="#2196F3",
-        placeholder_text_color="#9E9E9E",
+        font=("Inter", 12),
+        text_color="#2C3E50",
+        fg_color="transparent",
+        placeholder_text_color="#95A5A6",
         border_width=0,
         width=180 if user_img else 200
     )
@@ -96,7 +98,9 @@ def login():
     entradaSenha_frame = ctk.CTkFrame(
         master=janela_login,
         fg_color="#FFFFFF",
-        corner_radius=50,
+        border_color="#BDC3C7",
+        border_width=1,
+        corner_radius=10,
         width=234,
         height=41
     )
@@ -109,10 +113,10 @@ def login():
     entrada_senha = ctk.CTkEntry(
         entradaSenha_frame,
         placeholder_text="Senha",
-        font=("Inter", 12, "italic"),
-        text_color="000000",
-        fg_color="#2196F3",
-        placeholder_text_color="#9E9E9E",
+        font=("Inter", 12),
+        text_color="#2C3E50",
+        fg_color="transparent",
+        placeholder_text_color="#95A5A6",
         border_width=0,
         width=180 if password_img else 200,
         show="*"
@@ -125,11 +129,11 @@ def login():
         text="Entrar",
         font=("Inter", 16, "bold"),
         text_color="#FFFFFF",
-        fg_color="#2196F3",
-        hover_color="#1976D2",
+        fg_color="#3498DB",
+        hover_color="#2980B9",
         width=234,
         height=41,
-        corner_radius=50,
+        corner_radius=8,
         command=verificar_login
     )
     entrarButton.place(x=133, y=307)
@@ -145,41 +149,41 @@ def menu_principal():
     except:
         pass
     janela.resizable(False, False)
-    janela.configure(fg_color="#FFFFFF")
+    janela.configure(fg_color="#ECF0F1")
 
     titleText = ctk.CTkLabel(
         master=janela,
         text="Pet Shop",
-        font=("Inter", 42, "bold"),
-        text_color="#333333"
+        font=("Inter", 38, "bold"),
+        text_color="#2C3E50"
     )
     titleText.place(x=250, y=50)
 
     subtitleText = ctk.CTkLabel(
         master=janela,
         text="Sistema de Gestão",
-        font=("Inter", 18, "italic"),
-        text_color="#333333"
+        font=("Inter", 16),
+        text_color="#34495E"
     )
-    subtitleText.place(x=275, y=100)
+    subtitleText.place(x=275, y=105)
 
     frame_botoes = ctk.CTkFrame(
         master=janela,
         fg_color="#FFFFFF",
-        corner_radius=20,
+        corner_radius=10,
         width=500,
         height=400
     )
     frame_botoes.place(x=100, y=150)
 
     button_style = {
-        "font": ("Inter", 16, "bold"),
+        "font": ("Inter", 14, "bold"),
         "text_color": "#FFFFFF",
-        "fg_color": "#3179a2",
-        "hover_color": "#202966",
+        "fg_color": "#3498DB",
+        "hover_color": "#2980B9",
         "width": 400,
-        "height": 45,
-        "corner_radius": 25
+        "height": 40,
+        "corner_radius": 8
     }
 
     ctk.CTkButton(
@@ -221,13 +225,13 @@ def menu_principal():
         master=frame_botoes,
         text="❌ Sair",
         command=janela.quit,
-        font=("Inter", 16, "bold"),
+        font=("Inter", 14, "bold"),
         text_color="#FFFFFF",
-        fg_color="#CC4125",
-        hover_color="#A63419",
+        fg_color="#E74C3C",
+        hover_color="#C0392B",
         width=400,
-        height=45,
-        corner_radius=25
+        height=40,
+        corner_radius=8
     )
     sair_button.place(x=50, y=330)
 

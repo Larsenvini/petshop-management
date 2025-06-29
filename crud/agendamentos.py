@@ -45,60 +45,96 @@ def excluir_agendamento(id_agendamento):
 
 def criar_janela_agendamentos():
     janela = ctk.CTk()
-    janela.geometry("1000x700")
+    janela.geometry("800x600")
     janela.title("Gerenciamento de Agendamentos")
-    janela.configure(fg_color="#FFFFFF")
+    janela.configure(fg_color="#ECF0F1")
+    janela.resizable(False, False)
 
-    # Campos de entrada
-    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")
+    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
     frame_campos.pack(pady=20, padx=20, fill="x")
 
-    ctk.CTkLabel(frame_campos, text="Animal:").grid(row=0, column=0, padx=5, pady=5)
-    lista_animais = ctk.CTkComboBox(frame_campos)
-    lista_animais.grid(row=0, column=1, padx=5, pady=5)
+    label_font = ("Inter", 12)
+    entry_font = ("Inter", 12)
+    text_color = "#2C3E50"
 
-    ctk.CTkLabel(frame_campos, text="Serviço:").grid(row=1, column=0, padx=5, pady=5)
-    lista_servicos = ctk.CTkComboBox(frame_campos)
-    lista_servicos.grid(row=1, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID (para editar/excluir):", font=label_font, text_color=text_color).grid(row=0, column=0, padx=10, pady=8, sticky="w")
+    entrada_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_id.grid(row=0, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Data e Hora:").grid(row=2, column=0, padx=5, pady=5)
-    entrada_data = ctk.CTkEntry(frame_campos)
-    entrada_data.grid(row=2, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID Animal:", font=label_font, text_color=text_color).grid(row=1, column=0, padx=10, pady=8, sticky="w")
+    entrada_animal_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_animal_id.grid(row=1, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Observações:").grid(row=3, column=0, padx=5, pady=5)
-    entrada_observacoes = ctk.CTkEntry(frame_campos)
-    entrada_observacoes.grid(row=3, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID Serviço:", font=label_font, text_color=text_color).grid(row=2, column=0, padx=10, pady=8, sticky="w")
+    entrada_servico_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_servico_id.grid(row=2, column=1, padx=10, pady=8)
 
-    # Botões
-    frame_botoes = ctk.CTkFrame(janela, fg_color="#2196F3")
+    ctk.CTkLabel(frame_campos, text="Data (AAAA-MM-DD HH:MM):", font=label_font, text_color=text_color).grid(row=3, column=0, padx=10, pady=8, sticky="w")
+    entrada_data = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_data.grid(row=3, column=1, padx=10, pady=8)
+    
+    frame_campos.grid_columnconfigure(0, weight=1)
+    frame_campos.grid_columnconfigure(1, weight=3)
+
+    def cadastrar():
+        try:
+            cadastrar_agendamento(
+                entrada_animal_id.get(),
+                entrada_servico_id.get(),
+                entrada_data.get(),
+                ""
+            )
+            limpar_campos()
+            atualizar_lista()
+        except ValueError:
+            pass
+
+    def atualizar():
+        try:
+            atualizar_agendamento(
+                int(entrada_id.get()),
+                int(entrada_animal_id.get()),
+                int(entrada_servico_id.get()),
+                entrada_data.get(),
+                "",
+                "concluído"
+            )
+            limpar_campos()
+            atualizar_lista()
+        except ValueError:
+            pass
+
+    def excluir():
+        try:
+            excluir_agendamento(int(entrada_id.get()))
+            limpar_campos()
+            atualizar_lista()
+        except ValueError:
+            pass
+    
+    def limpar_campos():
+        entrada_id.delete(0, 'end')
+        entrada_animal_id.delete(0, 'end')
+        entrada_servico_id.delete(0, 'end')
+        entrada_data.delete(0, 'end')
+
+    frame_botoes = ctk.CTkFrame(janela, fg_color="transparent")
     frame_botoes.pack(pady=10)
 
-    ctk.CTkButton(frame_botoes, text="Cadastrar", command=lambda: cadastrar_agendamento(
-        lista_animais.get(),
-        lista_servicos.get(),
-        entrada_data.get(),
-        entrada_observacoes.get()
-    )).pack(side="left", padx=5)
+    button_font = ("Inter", 12, "bold")
+    button_corner_radius = 8
 
-    ctk.CTkButton(frame_botoes, text="Atualizar", command=lambda: atualizar_agendamento(
-        entrada_id.get(),
-        lista_animais.get(),
-        lista_servicos.get(),
-        entrada_data.get(),
-        entrada_observacoes.get(),
-        lista_status.get()
-    )).pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Atualizar", command=atualizar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Excluir", command=excluir, font=button_font, corner_radius=button_corner_radius, fg_color="#E74C3C", hover_color="#C0392B").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos, font=button_font, corner_radius=button_corner_radius, fg_color="#95A5A6", hover_color="#7F8C8D").pack(side="left", padx=5)
 
-    ctk.CTkButton(frame_botoes, text="Excluir", command=lambda: excluir_agendamento(entrada_id.get())).pack(side="left", padx=5)
+    frame_lista = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
+    frame_lista.pack(fill="both", expand=True, padx=20, pady=10)
 
-    # Lista de agendamentos
-    frame_lista = ctk.CTkFrame(janela, fg_color="#2196F3")
-    frame_lista.pack(fill="both", expand=True, padx=20, pady=20)
+    lista_agendamentos = ctk.CTkTextbox(frame_lista, fg_color="transparent", font=("Inter", 12), text_color="#333333")
+    lista_agendamentos.pack(fill="both", expand=True, padx=10, pady=10)
 
-    lista_agendamentos = ctk.CTkTextbox(frame_lista)
-    lista_agendamentos.pack(fill="both", expand=True)
-
-    # Função para atualizar lista
     def atualizar_lista():
         agendamentos = listar_agendamentos()
         lista_agendamentos.delete("1.0", "end")

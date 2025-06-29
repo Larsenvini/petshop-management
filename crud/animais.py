@@ -48,79 +48,70 @@ def criar_janela_animais():
     janela = ctk.CTk()
     janela.geometry("800x600")
     janela.title("Gerenciamento de Animais")
-    janela.configure(fg_color="#FFFFFF")
+    janela.configure(fg_color="#ECF0F1")
+    janela.resizable(False, False)
 
-    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")
+    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
     frame_campos.pack(pady=20, padx=20, fill="x")
 
-    ctk.CTkLabel(frame_campos, text="ID (para editar/excluir):").grid(row=0, column=0, padx=5, pady=5)
-    entrada_id = ctk.CTkEntry(frame_campos)
-    entrada_id.grid(row=0, column=1, padx=5, pady=5)
+    label_font = ("Inter", 12)
+    entry_font = ("Inter", 12)
+    text_color = "#2C3E50"
 
-    ctk.CTkLabel(frame_campos, text="Nome:").grid(row=1, column=0, padx=5, pady=5)
-    entrada_nome = ctk.CTkEntry(frame_campos)
-    entrada_nome.grid(row=1, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID (para editar/excluir):", font=label_font, text_color=text_color).grid(row=0, column=0, padx=10, pady=8, sticky="w")
+    entrada_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_id.grid(row=0, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Espécie:").grid(row=2, column=0, padx=5, pady=5)
-    entrada_especie = ctk.CTkEntry(frame_campos)
-    entrada_especie.grid(row=2, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Nome:", font=label_font, text_color=text_color).grid(row=1, column=0, padx=10, pady=8, sticky="w")
+    entrada_nome = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_nome.grid(row=1, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Raça:").grid(row=3, column=0, padx=5, pady=5)
-    entrada_raca = ctk.CTkEntry(frame_campos)
-    entrada_raca.grid(row=3, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Espécie:", font=label_font, text_color=text_color).grid(row=2, column=0, padx=10, pady=8, sticky="w")
+    entrada_especie = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_especie.grid(row=2, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Idade:").grid(row=4, column=0, padx=5, pady=5)
-    entrada_idade = ctk.CTkEntry(frame_campos)
-    entrada_idade.grid(row=4, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Raça:", font=label_font, text_color=text_color).grid(row=3, column=0, padx=10, pady=8, sticky="w")
+    entrada_raca = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_raca.grid(row=3, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Peso:").grid(row=5, column=0, padx=5, pady=5)
-    entrada_peso = ctk.CTkEntry(frame_campos)
-    entrada_peso.grid(row=5, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Idade:", font=label_font, text_color=text_color).grid(row=4, column=0, padx=10, pady=8, sticky="w")
+    entrada_idade = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_idade.grid(row=4, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Tutor:").grid(row=6, column=0, padx=5, pady=5)
-    lista_tutores = ctk.CTkComboBox(frame_campos)
-    lista_tutores.grid(row=6, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID do Tutor:", font=label_font, text_color=text_color).grid(row=5, column=0, padx=10, pady=8, sticky="w")
+    entrada_tutor_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_tutor_id.grid(row=5, column=1, padx=10, pady=8)
 
-    def carregar_tutores():
-        tutores = obter_tutores()
-        valores = [f"{tutor[0]} - {tutor[1]}" for tutor in tutores]
-        lista_tutores.configure(values=valores)
-        if valores:
-            lista_tutores.set(valores[0])
-
+    frame_campos.grid_columnconfigure(0, weight=1)
+    frame_campos.grid_columnconfigure(1, weight=3)
+    
     def cadastrar():
         try:
-            tutor_selecionado = lista_tutores.get()
-            id_tutor = int(tutor_selecionado.split(" - ")[0])
             cadastrar_animal(
                 entrada_nome.get(),
                 entrada_especie.get(),
                 entrada_raca.get(),
                 int(entrada_idade.get()),
-                float(entrada_peso.get()),
-                id_tutor
+                int(entrada_tutor_id.get())
             )
             limpar_campos()
             atualizar_lista()
-        except (ValueError, IndexError):
+        except ValueError:
             pass
 
     def atualizar():
         try:
-            tutor_selecionado = lista_tutores.get()
-            id_tutor = int(tutor_selecionado.split(" - ")[0])
             atualizar_animal(
                 int(entrada_id.get()),
                 entrada_nome.get(),
                 entrada_especie.get(),
                 entrada_raca.get(),
                 int(entrada_idade.get()),
-                float(entrada_peso.get()),
-                id_tutor
+                int(entrada_tutor_id.get())
             )
             limpar_campos()
             atualizar_lista()
-        except (ValueError, IndexError):
+        except ValueError:
             pass
 
     def excluir():
@@ -137,21 +128,24 @@ def criar_janela_animais():
         entrada_especie.delete(0, 'end')
         entrada_raca.delete(0, 'end')
         entrada_idade.delete(0, 'end')
-        entrada_peso.delete(0, 'end')
+        entrada_tutor_id.delete(0, 'end')
 
-    frame_botoes = ctk.CTkFrame(janela, fg_color="#2196F3")
+    frame_botoes = ctk.CTkFrame(janela, fg_color="transparent")
     frame_botoes.pack(pady=10)
 
-    ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar).pack(side="left", padx=5)
-    ctk.CTkButton(frame_botoes, text="Atualizar", command=atualizar).pack(side="left", padx=5)
-    ctk.CTkButton(frame_botoes, text="Excluir", command=excluir).pack(side="left", padx=5)
-    ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos).pack(side="left", padx=5)
+    button_font = ("Inter", 12, "bold")
+    button_corner_radius = 8
 
-    frame_lista = ctk.CTkFrame(janela, fg_color="#2196F3")
-    frame_lista.pack(fill="both", expand=True, padx=20, pady=20)
+    ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Atualizar", command=atualizar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Excluir", command=excluir, font=button_font, corner_radius=button_corner_radius, fg_color="#E74C3C", hover_color="#C0392B").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos, font=button_font, corner_radius=button_corner_radius, fg_color="#95A5A6", hover_color="#7F8C8D").pack(side="left", padx=5)
 
-    lista_animais = ctk.CTkTextbox(frame_lista)
-    lista_animais.pack(fill="both", expand=True)
+    frame_lista = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
+    frame_lista.pack(fill="both", expand=True, padx=20, pady=10)
+
+    lista_animais = ctk.CTkTextbox(frame_lista, fg_color="transparent", font=("Inter", 12), text_color="#333333")
+    lista_animais.pack(fill="both", expand=True, padx=10, pady=10)
 
     def atualizar_lista():
         animais = listar_animais()
@@ -159,7 +153,6 @@ def criar_janela_animais():
         for animal in animais:
             lista_animais.insert("end", f"ID: {animal[0]} - {animal[1]} ({animal[2]}) - Tutor: {animal[7]}\n")
 
-    carregar_tutores()
     atualizar_lista()
     janela.mainloop()
 

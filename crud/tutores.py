@@ -39,34 +39,42 @@ def criar_janela_tutores():
     janela = ctk.CTk()
     janela.geometry("800x600")
     janela.title("Gerenciamento de Tutores")
-    janela.configure(fg_color="#FFFFFF")
+    janela.configure(fg_color="#ECF0F1")
+    janela.resizable(False, False)
 
-    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")
+    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
     frame_campos.pack(pady=20, padx=20, fill="x")
 
-    ctk.CTkLabel(frame_campos, text="ID (para editar/excluir):").grid(row=0, column=0, padx=5, pady=5)
-    entrada_id = ctk.CTkEntry(frame_campos)
-    entrada_id.grid(row=0, column=1, padx=5, pady=5)
+    label_font = ("Inter", 12)
+    entry_font = ("Inter", 12)
+    text_color = "#2C3E50"
 
-    ctk.CTkLabel(frame_campos, text="Nome:").grid(row=1, column=0, padx=5, pady=5)
-    entrada_nome = ctk.CTkEntry(frame_campos)
-    entrada_nome.grid(row=1, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="ID (para editar/excluir):", font=label_font, text_color=text_color).grid(row=0, column=0, padx=10, pady=8, sticky="w")
+    entrada_id = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_id.grid(row=0, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Telefone:").grid(row=2, column=0, padx=5, pady=5)
-    entrada_telefone = ctk.CTkEntry(frame_campos)
-    entrada_telefone.grid(row=2, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Nome:", font=label_font, text_color=text_color).grid(row=1, column=0, padx=10, pady=8, sticky="w")
+    entrada_nome = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_nome.grid(row=1, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Email:").grid(row=3, column=0, padx=5, pady=5)
-    entrada_email = ctk.CTkEntry(frame_campos)
-    entrada_email.grid(row=3, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Telefone:", font=label_font, text_color=text_color).grid(row=2, column=0, padx=10, pady=8, sticky="w")
+    entrada_telefone = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_telefone.grid(row=2, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="Endereço:").grid(row=4, column=0, padx=5, pady=5)
-    entrada_endereco = ctk.CTkEntry(frame_campos)
-    entrada_endereco.grid(row=4, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Email:", font=label_font, text_color=text_color).grid(row=3, column=0, padx=10, pady=8, sticky="w")
+    entrada_email = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_email.grid(row=3, column=1, padx=10, pady=8)
 
-    ctk.CTkLabel(frame_campos, text="CPF:").grid(row=5, column=0, padx=5, pady=5)
-    entrada_cpf = ctk.CTkEntry(frame_campos)
-    entrada_cpf.grid(row=5, column=1, padx=5, pady=5)
+    ctk.CTkLabel(frame_campos, text="Endereço:", font=label_font, text_color=text_color).grid(row=4, column=0, padx=10, pady=8, sticky="w")
+    entrada_endereco = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_endereco.grid(row=4, column=1, padx=10, pady=8)
+
+    ctk.CTkLabel(frame_campos, text="CPF:", font=label_font, text_color=text_color).grid(row=5, column=0, padx=10, pady=8, sticky="w")
+    entrada_cpf = ctk.CTkEntry(frame_campos, font=entry_font, width=250)
+    entrada_cpf.grid(row=5, column=1, padx=10, pady=8)
+
+    frame_campos.grid_columnconfigure(0, weight=1)
+    frame_campos.grid_columnconfigure(1, weight=3)
 
     def cadastrar():
         try:
@@ -113,19 +121,22 @@ def criar_janela_tutores():
         entrada_endereco.delete(0, 'end')
         entrada_cpf.delete(0, 'end')
 
-    frame_botoes = ctk.CTkFrame(janela, fg_color="#2196F3")
+    frame_botoes = ctk.CTkFrame(janela, fg_color="transparent")
     frame_botoes.pack(pady=10)
 
-    ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar).pack(side="left", padx=5)
-    ctk.CTkButton(frame_botoes, text="Atualizar", command=atualizar).pack(side="left", padx=5)
-    ctk.CTkButton(frame_botoes, text="Excluir", command=excluir).pack(side="left", padx=5)
-    ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos).pack(side="left", padx=5)
+    button_font = ("Inter", 12, "bold")
+    button_corner_radius = 8
 
-    frame_lista = ctk.CTkFrame(janela, fg_color="#2196F3")
-    frame_lista.pack(fill="both", expand=True, padx=20, pady=20)
+    ctk.CTkButton(frame_botoes, text="Cadastrar", command=cadastrar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Atualizar", command=atualizar, font=button_font, corner_radius=button_corner_radius, fg_color="#3498DB", hover_color="#2980B9").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Excluir", command=excluir, font=button_font, corner_radius=button_corner_radius, fg_color="#E74C3C", hover_color="#C0392B").pack(side="left", padx=5)
+    ctk.CTkButton(frame_botoes, text="Limpar", command=limpar_campos, font=button_font, corner_radius=button_corner_radius, fg_color="#95A5A6", hover_color="#7F8C8D").pack(side="left", padx=5)
 
-    lista_tutores = ctk.CTkTextbox(frame_lista)
-    lista_tutores.pack(fill="both", expand=True)
+    frame_lista = ctk.CTkFrame(janela, fg_color="#FFFFFF", corner_radius=10)
+    frame_lista.pack(fill="both", expand=True, padx=20, pady=10)
+
+    lista_tutores = ctk.CTkTextbox(frame_lista, fg_color="transparent", font=("Inter", 12), text_color="#333333")
+    lista_tutores.pack(fill="both", expand=True, padx=10, pady=10)
 
     def atualizar_lista():
         tutores = listar_tutores()
