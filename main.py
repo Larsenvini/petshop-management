@@ -145,7 +145,7 @@ def menu_principal():
     except:
         pass
     janela.resizable(False, False)
-    janela.configure(fg_color="#FFFFFF")
+    janela.configure(fg_color="#3179a2")
 
     # Título principal
     titleText = ctk.CTkLabel(

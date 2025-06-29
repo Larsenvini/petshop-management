@@ -47,10 +47,10 @@ def criar_janela_pagamentos():
     janela = ctk.CTk()
     janela.geometry("1000x700")
     janela.title("Gerenciamento de Pagamentos")
-    janela.configure(fg_color="#FFEADF")
+    janela.configure(fg_color="#3179a2")
 
     # Campos de entrada
-    frame_campos = ctk.CTkFrame(janela, fg_color="#D9D9D9")
+    frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")
     frame_campos.pack(pady=20, padx=20, fill="x")
 
     ctk.CTkLabel(frame_campos, text="Agendamento:").grid(row=0, column=0, padx=5, pady=5)
@@ -66,7 +66,7 @@ def criar_janela_pagamentos():
     lista_formas.grid(row=2, column=1, padx=5, pady=5)
 
     # Botões
-    frame_botoes = ctk.CTkFrame(janela, fg_color="#D9D9D9")
+    frame_botoes = ctk.CTkFrame(janela, fg_color="#3179a2")
     frame_botoes.pack(pady=10)
 
     ctk.CTkButton(frame_botoes, text="Cadastrar", command=lambda: cadastrar_pagamento(
@@ -86,7 +86,7 @@ def criar_janela_pagamentos():
     ctk.CTkButton(frame_botoes, text="Excluir", command=lambda: excluir_pagamento(entrada_id.get())).pack(side="left", padx=5)
 
     # Lista de pagamentos
-    frame_lista = ctk.CTkFrame(janela, fg_color="#D9D9D9")
+    frame_lista = ctk.CTkFrame(janela, fg_color="#3179a2")
     frame_lista.pack(fill="both", expand=True, padx=20, pady=20)
 
     lista_pagamentos = ctk.CTkTextbox(frame_lista)
