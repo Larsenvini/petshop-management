@@ -34,7 +34,7 @@ def login():
         pass
     janela_login.title("Pet Shop - Login")
     janela_login.resizable(False, False)
-    janela_login.configure(fg_color="#FFEADF")
+    janela_login.configure(fg_color="#FFFFFF")
 
     loginText = ctk.CTkLabel(
         master=janela_login,
@@ -85,7 +85,7 @@ def login():
         placeholder_text="Usuário",
         font=("Inter", 12, "italic"),
         text_color="#000000",
-        fg_color="#FFFFFF",
+        fg_color="#3179a2",
         placeholder_text_color="#202966",
         border_width=0,
         width=180 if user_img else 200
@@ -111,7 +111,7 @@ def login():
         placeholder_text="Senha",
         font=("Inter", 12, "italic"),
         text_color="000000",
-        fg_color="#FFFFFF",
+        fg_color="#3179a2",
         placeholder_text_color="#202966",
         border_width=0,
         width=180 if password_img else 200,
@@ -147,7 +147,6 @@ def menu_principal():
     janela.resizable(False, False)
     janela.configure(fg_color="#3179a2")
 
-    # Título principal
     titleText = ctk.CTkLabel(
         master=janela,
         text="Pet Shop",
