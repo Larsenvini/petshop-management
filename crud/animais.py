@@ -48,7 +48,7 @@ def criar_janela_animais():
     janela = ctk.CTk()
     janela.geometry("800x600")
     janela.title("Gerenciamento de Animais")
-    janela.configure(fg_color="#3179a2")
+    janela.configure(fg_color="#FFFFFF")
 
     frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")
     frame_campos.pack(pady=20, padx=20, fill="x")

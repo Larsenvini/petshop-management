@@ -47,7 +47,7 @@ def criar_janela_agendamentos():
     janela = ctk.CTk()
     janela.geometry("1000x700")
     janela.title("Gerenciamento de Agendamentos")
-    janela.configure(fg_color="#3179a2")
+    janela.configure(fg_color="#FFFFFF")
 
     # Campos de entrada
     frame_campos = ctk.CTkFrame(janela, fg_color="#FFFFFF")

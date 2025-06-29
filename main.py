@@ -40,7 +40,7 @@ def login():
         master=janela_login,
         text="Pet Shop",
         font=("Inter", 38, "bold"),
-        text_color="#FFFFFF"
+        text_color="#202966"
     )
     loginText.place(x=175, y=100)
 
