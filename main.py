@@ -40,14 +40,14 @@ def login():
         master=janela_login,
         text="Pet Shop",
         font=("Inter", 38, "bold"),
-        text_color="#202966"
+        text_color="#FFFFFF"
     )
     loginText.place(x=175, y=100)
 
     subtitleText = ctk.CTkLabel(
         master=janela_login,
         text="Management System",
-        font=("Inter", 16, "italic"),
+        font=("Inter", 16, "bold"),
         text_color="#202966"
     )
     subtitleText.place(x=185, y=140)
